@@ -114,12 +114,14 @@ void VirtualButton::turnLightOn(int rowIndex, int colIndex)
 {
 	char text[200];
 	int currIndex = rowIndex * maxCol + colIndex;
+	currRowIndex = rowIndex;
+	currColIndex = colIndex;
 	sprintf(text, "Currnet Index=%d", currIndex);
 	putText(showMat, text, Point(0, textPosition[rowIndex][colIndex]), 0, 1, buttonColor[rowIndex][colIndex], 3);
 	if(currIndex==3)
-		sendKey(VK_LEFT);
+		moveWindowLeft();
 	if (currIndex == 5)
-		sendKey(VK_RIGHT);
+		moveWindowRight();
 }
 
 bool Camera::checkError()
@@ -166,7 +168,14 @@ void VirtualButton::drawButtons()
 	for (int rowIndex = 0; rowIndex < maxRow; rowIndex++)
 		for (int colIndex = 0; colIndex < maxCol; colIndex++)
 		{
-			rectangle(showMat, buttonRect[rowIndex][colIndex], buttonColor[rowIndex][colIndex], -1);
+			if (rowIndex == currRowIndex && colIndex == currColIndex)
+			{
+				rectangle(showMat, buttonRect[rowIndex][colIndex], Scalar(255, 0, 255), -1);
+			}
+			else
+			{
+				rectangle(showMat, buttonRect[rowIndex][colIndex], buttonColor[rowIndex][colIndex], -1);
+			}
 		}
 }
 

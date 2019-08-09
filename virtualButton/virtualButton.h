@@ -44,8 +44,11 @@ private:
 	void initVariable();
 	double getCost(Rect buttonRect);
 
-	int costTh = 22000;
+	int costTh = 52000;
 	char showTime[200];	
+
+	int currRowIndex = -1;
+	int currColIndex = -1;
 
 	int windowX = 0;
 	int windowY = 0;
